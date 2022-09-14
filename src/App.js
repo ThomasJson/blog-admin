@@ -5,9 +5,10 @@ function App() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("http://blog.api/")
+    fetch("http://blog-api.loc/")
       .then((response) => response.text())
-      .then((content) => setText(content));
+      .then((content) => setText(content))
+      .catch(err=>console.error(err));
   }, []);
 
   return (
