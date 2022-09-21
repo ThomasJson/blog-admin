@@ -1,5 +1,5 @@
 .sidenav {
-  visibility: visible;
+  visibility: visible !important;
   transform: translateX(0) !important;
   width: 200px !important;
 }
