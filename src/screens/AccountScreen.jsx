@@ -1,11 +1,49 @@
-import React from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 
 const AccountScreen = () => {
-    return (
-        <>
-            <h1>Liste des comptes utilisateurs</h1>
-        </>
-    );
+    
+  const [appUsers, setAppUsers] = useState([]);
+
+  // Nous utilisons un useEffect qui ne s’exécute qu’une fois
+  // (au chargement du composant)
+
+  useEffect(() => {
+    fetch("http://blog-api.loc/appuser")
+      .then((resp) => resp.json())
+      // Une fois les données récupérées,
+      // nous mettons à jour le state (avec set...)
+
+      // Pour afficher les mots-clés par ordre alphabétique,
+      // nous modifions le useEffect en ajoutant un
+      // sort sur le json reçu de l’api rest
+      .then((json) => {
+        json = json.sort((a, b) => {
+          return a.pseudo.toLowerCase() > b.pseudo.toLowerCase() ? 1 : -1;
+        });
+        setAppUsers(json);
+      });
+  }, []);
+
+  return (
+    <>
+      <h1>Liste des Comptes</h1>
+      {/* nous utilisons map sur le state tags afin de créer les lignes 
+      dans le tbody du tableau */}
+      <table>
+        <tbody>
+          {appUsers.map((user) => {
+            return (
+              <tr key={user.Id_appUser}>
+                <td>{user.pseudo}</td>
+                <td></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
 };
 
 export default AccountScreen;
