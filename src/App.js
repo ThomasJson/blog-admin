@@ -9,6 +9,7 @@ import AccountScreen from "./screens/AccountScreen";
 import ArticleScreen from "./screens/ArticleScreen";
 import ThemeScreen from "./screens/ThemeScreen";
 import TagScreen from "./screens/TagScreen";
+import TagDetailScreen from './screens/TagDetailScreen';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -24,6 +25,8 @@ function App() {
           <Route path="/articles" element={<ArticleScreen />} />
           <Route path="/themes" element={<ThemeScreen />} />
           <Route path="/tags" element={<TagScreen />} />
+          {/* cette page va permettre d’afficher le détail d’un tag */}
+          <Route path="/tag/:id" element={<TagDetailScreen />} />
           <Route path="*" element={<h1>404 not found</h1>} />
         </Route>
         

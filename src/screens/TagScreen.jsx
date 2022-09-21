@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TagScreen = () => {
     
@@ -25,6 +26,8 @@ const TagScreen = () => {
       });
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <h1>Liste des mots-clés</h1>
@@ -34,7 +37,7 @@ const TagScreen = () => {
         <tbody>
           {tags.map((tag) => {
             return (
-              <tr key={tag.Id_tag}>
+              <tr key={tag.Id_tag} onClick={()=>{navigate(`/tag/${tag.Id_tag}`);}} >
                 <td>{tag.title}</td>
                 <td></td>
               </tr>
