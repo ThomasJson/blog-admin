@@ -25,13 +25,13 @@ function App() {
           <Route index element={<LandingScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/accounts" element={<AccountScreen />} />
-          {/* cette page va permettre d’afficher le détail d’un tag */}
+          {/* cette page va permettre d’afficher le détail d’un account */}
           <Route path="/account/:id" element={<AccountDetailScreen />} />
           <Route path="/articles" element={<ArticleScreen />} />
-          {/* cette page va permettre d’afficher le détail d’un tag */}
+          {/* cette page va permettre d’afficher le détail d’un article */}
           <Route path="/article/:id" element={<ArticleDetailScreen />} />
           <Route path="/themes" element={<ThemeScreen />} />
-          {/* cette page va permettre d’afficher le détail d’un tag */}
+          {/* cette page va permettre d’afficher le détail d’un theme */}
           <Route path="/theme/:id" element={<ThemeDetailScreen />} />
           <Route path="/tags" element={<TagScreen />} />
           {/* cette page va permettre d’afficher le détail d’un tag */}
