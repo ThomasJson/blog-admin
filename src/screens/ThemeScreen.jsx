@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ThemeScreen = () => {
     
   const [themes, setThemes] = useState([]);
+
+  const navigate = useNavigate();
 
   // Nous utilisons un useEffect qui ne s’exécute qu’une fois
   // (au chargement du composant)
@@ -34,7 +37,7 @@ const ThemeScreen = () => {
         <tbody>
           {themes.map((theme) => {
             return (
-              <tr key={theme.Id_theme}>
+              <tr key={theme.Id_theme} onClick={()=>{navigate(`/theme/${theme.Id_theme}`);}}>
                 <td>{theme.title}</td>
                 <td></td>
               </tr>
