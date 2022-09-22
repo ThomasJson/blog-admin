@@ -8,7 +8,10 @@ const AccountDetailScreen = () => {
   const [account, setAccount] = useState(null);
 
   useEffect(() => {
-    fetch("http://blog-api.loc/appuser/" + id)
+    fetch("http://blog-api.loc/appuser/" + id, {
+        method: "POST",
+        body: JSON.stringify({with:['account', 'role']})
+    })
       .then((resp) => resp.json())
       .then((json) => {
         setAccount(json);
@@ -17,7 +20,9 @@ const AccountDetailScreen = () => {
 
   return (
     <>
-      <h1>Détail du compte : {account?.pseudo}</h1>
+      <h1>Détail de l'utilisateur : {account?.pseudo}</h1>
+      <b>email : </b> {account?.account?.login}<br/>
+      <b>role : </b> {account?.role?.title}<br/>
     </>
   );
 };
