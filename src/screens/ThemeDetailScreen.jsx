@@ -3,23 +3,25 @@ import { useParams } from "react-router-dom";
 // Récupérer l’id de la route
 import { useState, useEffect } from "react";
 
-const TagDetailScreen = () => {
+const ThemeDetailScreen = () => {
   const { id } = useParams();
-  const [tag, setTag] = useState(null);
+  const [theme, setTheme] = useState(null);
 
   useEffect(() => {
-    fetch("http://blog-api.loc/tag/" + id)
+    fetch("http://blog-api.loc/theme/" + id)
       .then((resp) => resp.json())
       .then((json) => {
-        setTag(json);
+        setTheme(json);
       });
   }, [id]);
 
   return (
     <>
-      <h1>Détail du mot-clé : {tag?.title}</h1>
+      <h1>Détail du Thème : {theme?.title}</h1>
+      {/* TODO INSERT IMG */}
+      <img src={theme?.img_src} alt="pHo" />
     </>
   );
 };
 
-export default TagDetailScreen;
+export default ThemeDetailScreen;
