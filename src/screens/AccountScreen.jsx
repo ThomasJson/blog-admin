@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AccountScreen = () => {
     
   const [appUsers, setAppUsers] = useState([]);
+
+  const navigate = useNavigate();
 
   // Nous utilisons un useEffect qui ne s’exécute qu’une fois
   // (au chargement du composant)
@@ -34,7 +37,7 @@ const AccountScreen = () => {
         <tbody>
           {appUsers.map((user) => {
             return (
-              <tr key={user.Id_appUser}>
+              <tr key={user.Id_appUser} onClick={()=>{navigate(`/account/${user.Id_appUser}`);}}>
                 <td>{user.pseudo}</td>
                 <td></td>
               </tr>

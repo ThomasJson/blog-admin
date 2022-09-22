@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ArticleScreen = () => {
     
   const [articles, setArticles] = useState([]);
+
+  const navigate = useNavigate();
 
   // Nous utilisons un useEffect qui ne s’exécute qu’une fois
   // (au chargement du composant)
@@ -19,7 +22,7 @@ const ArticleScreen = () => {
       // sort sur le json reçu de l’api rest
       .then((json) => {
         json = json.sort((a, b) => {
-          return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+          return a.created_at.toLowerCase() > b.created_at.toLowerCase() ? 1 : -1;
         });
         setArticles(json);
       });
@@ -34,7 +37,7 @@ const ArticleScreen = () => {
         <tbody>
           {articles.map((article) => {
             return (
-              <tr key={article.Id_article}>
+              <tr key={article.Id_article} onClick={()=>{navigate(`/article/${article.Id_article}`);}}>
                 <td>{article.title}</td>
                 <td></td>
               </tr>
