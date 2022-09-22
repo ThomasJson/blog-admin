@@ -6,6 +6,8 @@ const TagScreen = () => {
     
   const [tags, setTags] = useState([]);
 
+  const navigate = useNavigate();
+
   // Nous utilisons un useEffect qui ne s’exécute qu’une fois
   // (au chargement du composant)
 
@@ -25,8 +27,6 @@ const TagScreen = () => {
         setTags(json);
       });
   }, []);
-
-  const navigate = useNavigate();
 
   return (
     <>
