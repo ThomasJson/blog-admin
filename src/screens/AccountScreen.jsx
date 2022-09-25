@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AccountScreen = () => {
-    
   const [appUsers, setAppUsers] = useState([]);
 
   const navigate = useNavigate();
@@ -12,7 +11,10 @@ const AccountScreen = () => {
   // (au chargement du composant)
 
   useEffect(() => {
-    fetch("http://blog-api.loc/appuser")
+    fetch("http://blog-api.loc/appuser/0", {
+      method: "POST",
+      body: JSON.stringify({ with: ["account", "role"] }),
+    })
       .then((resp) => resp.json())
       // Une fois les données récupérées,
       // nous mettons à jour le state (avec set...)
@@ -37,9 +39,21 @@ const AccountScreen = () => {
         <tbody>
           {appUsers.map((user) => {
             return (
-              <tr key={user.Id_appUser} onClick={()=>{navigate(`/account/${user.Id_appUser}`);}}>
+              <tr
+                key={user.Id_appUser}
+                onClick={() => {
+                  navigate(`/account/${user.Id_appUser}`);
+                }}
+              >
                 <td>{user.pseudo}</td>
-                <td></td>
+                <td>
+                  <b>email : </b> {user?.account?.login}
+                  <br />
+                </td>
+                <td>
+                  <b>role : </b> {user?.role?.title}<br/>
+                  <br />
+                </td>
               </tr>
             );
           })}
