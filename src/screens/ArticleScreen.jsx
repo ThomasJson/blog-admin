@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ArticleScreen = () => {
-    
   const [articles, setArticles] = useState([]);
 
   const navigate = useNavigate();
@@ -12,7 +11,10 @@ const ArticleScreen = () => {
   // (au chargement du composant)
 
   useEffect(() => {
-    fetch("http://blog-api.loc/article")
+    fetch("http://blog-api.loc/article/0", {
+      method: "POST",
+      body: JSON.stringify({ with: ["appuser", "theme"] }),
+    })
       .then((resp) => resp.json())
       // Une fois les données récupérées,
       // nous mettons à jour le state (avec set...)
@@ -21,9 +23,9 @@ const ArticleScreen = () => {
       // nous modifions le useEffect en ajoutant un
       // sort sur le json reçu de l’api rest
       .then((json) => {
-        json = json.sort((a, b) => {
-          return a.created_at.toLowerCase() > b.created_at.toLowerCase() ? 1 : -1;
-        });
+        // json = json.sort((a, b) => {
+        //   return a.pseudo.toLowerCase() > b.pseudo.toLowerCase() ? 1 : -1;
+        // });
         setArticles(json);
       });
   }, []);
@@ -31,15 +33,36 @@ const ArticleScreen = () => {
   return (
     <>
       <h1>Liste des Articles</h1>
-      {/* nous utilisons map sur le state tags afin de créer les lignes 
-      dans le tbody du tableau */}
       <table>
         <tbody>
           {articles.map((article) => {
             return (
-              <tr key={article.Id_article} onClick={()=>{navigate(`/article/${article.Id_article}`);}}>
-                <td>{article.title}</td>
-                <td></td>
+              <tr
+                key={article.Id_article}
+                onClick={() => {
+                  navigate(`/article/${article.Id_article}`);
+                }}
+              >
+                <td>
+                  <b>Titre </b> {article.title}
+                  <br />
+                </td>
+
+                <td>
+                  <b>Date de publication : </b> {article.created_at}
+                  <br />
+                </td>
+
+                <td>
+                  <b>Auteur : </b> {article?.appUser?.pseudo}
+                  <br />
+                </td>
+
+                <td>
+                  <b>Thème : </b> {article?.theme?.title}
+                  <br />
+                </td>
+
               </tr>
             );
           })}
