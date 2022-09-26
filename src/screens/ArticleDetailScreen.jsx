@@ -1,3 +1,4 @@
+import "./articleDetailScreen.css";
 import React from "react";
 import { useParams } from "react-router-dom";
 // Récupérer l’id de la route
@@ -26,26 +27,42 @@ const ArticleDetailScreen = () => {
 
   return (
     <>
-      <h1>Détail de l'article : {article?.title}</h1>
-      <b>Publié par : </b> {article?.appUser?.pseudo}
-      <br />
-      <b>Date de Publication : </b> {article?.created_at}
-      <br />
-      <b>Thème : </b> {article?.theme?.title}
-      <br />
+      <h1>{article?.title}</h1>
+      <div className="article-infos">
+        <p className="infos">
+          <b>Publié par</b> : {article?.appUser?.pseudo}
+        </p>
+        <p className="infos">
+          <b>Date de Publication</b> : {article?.created_at}
+        </p>
+        <p className="infos">
+          <b>Thème</b> : {article?.theme?.title}
+        </p>
+      </div>
       <div>
-        Mots-clés :
+        Tags :
         {article?.tags_list.map((tag) => {
           return <span className="badge bg-secondary ms-2">{tag.title}</span>;
         })}
       </div>
-      <b>Contenu : </b> {article?.content}
+
+      <div className="article">
+        {article &&
+          Object.values(article.images_list).map((img) => {
+            return (
+              <img
+                key={img.Id_image}
+                src={img.src}
+                alt={img.alt}
+                style={{ width: "600px" }}
+                className="img-spacing"
+              />
+            );
+          })}
+        <div className="article-content">{article?.content}</div>
+      </div>
       <br />
-      {article &&
-        Object.values(article.images_list).map((img) => {
-          return <img key={img.Id_image} src={img.src} alt={img.alt} style={{width: '600px'}} />;
-        })}
-      <br />
+
       <h3>Commentaires</h3>
       {article &&
         Object.values(article?.comments_list).map((comment) => {

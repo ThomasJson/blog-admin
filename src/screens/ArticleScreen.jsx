@@ -1,3 +1,4 @@
+import "./articleScreen.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ const ArticleScreen = () => {
   useEffect(() => {
     fetch("http://blog-api.loc/article/0", {
       method: "POST",
-      body: JSON.stringify({ with: ["appuser", "theme"] }),
+      body: JSON.stringify({ with: ["appuser", "theme", "image"] }),
     })
       .then((resp) => resp.json())
       // Une fois les données récupérées,
@@ -33,41 +34,53 @@ const ArticleScreen = () => {
   return (
     <>
       <h1>Liste des Articles</h1>
-      <table>
-        <tbody>
-          {articles.map((article) => {
-            return (
-              <tr
-                key={article.Id_article}
-                onClick={() => {
-                  navigate(`/article/${article.Id_article}`);
-                }}
-              >
-                <td>
-                  <b>Titre </b> {article.title}
-                  <br />
-                </td>
+      <div className="articles-container">
+        {articles.map((article) => {
+          return (
+            <>
+              <div>
+                <div
+                  key={article.Id_article}
+                  className="card card-margin"
+                  style={{ width: "18rem" }}
+                >
+                  {article &&
+                    Object.values(article.images_list).map((img) => {
+                      return (
+                        <img
+                          key={img.Id_image}
+                          src={img.src}
+                          alt={img.alt}
+                          style={{ width: "100%", height: "200px" }}
+                          className="card-img-top"
+                        />
+                      );
+                    })}
 
-                <td>
-                  <b>Date de publication : </b> {article.created_at}
-                  <br />
-                </td>
-
-                <td>
-                  <b>Auteur : </b> {article?.appUser?.pseudo}
-                  <br />
-                </td>
-
-                <td>
-                  <b>Thème : </b> {article?.theme?.title}
-                  <br />
-                </td>
-
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                  <div className="card-body">
+                    <h5 className="card-title">{article.title}</h5>
+                    <p className="card-text">
+                      Publié le : {article.created_at}
+                    </p>
+                    <p className="card-text">
+                      Auteur : {article?.appUser?.pseudo}
+                    </p>
+                    <p className="card-text">Thème : {article?.theme?.title}</p>
+                    <div
+                      onClick={() => {
+                        navigate(`/article/${article.Id_article}`);
+                      }}
+                      class="btn btn-primary"
+                    >
+                      Lire l'article
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+        })}
+      </div>
     </>
   );
 };
