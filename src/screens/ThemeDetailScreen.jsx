@@ -20,13 +20,13 @@ const ThemeDetailScreen = () => {
 
   return (
     <>
-      <h1>Détail du thème : {theme?.title}</h1>
-      <img src={theme?.img_src} alt="pHo" />
-      <h2>Liste des articles</h2>
+      <h1>Thème : {theme?.title}</h1> 
+      <img src={theme?.img_src} alt="Pic" style={{width: '600px'}} />
+      <h2>Liste des articles :</h2>
 
       {theme?.articles_list.map((article) => {
         return (
-          <div>
+          <div key={article.Id_article}>
             <b className="me-2">{article.title}</b>
             publié le {new Date(article.created_at).toLocaleDateString()}
             <span className="ms-2">par {article?.appUser?.pseudo}</span>
