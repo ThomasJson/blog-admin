@@ -43,7 +43,7 @@ const ArticleDetailScreen = () => {
       <br />
       {article &&
         Object.values(article.images_list).map((img) => {
-          return <img key={img.Id_image} src={img.src} alt={img.alt} />;
+          return <img key={img.Id_image} src={img.src} alt={img.alt} style={{width: '600px'}} />;
         })}
       <br />
       <h3>Commentaires</h3>
