@@ -11,7 +11,9 @@ const ArticleDetailScreen = () => {
   useEffect(() => {
     fetch("http://blog-api.loc/article/" + id, {
       method: "POST",
-      body: JSON.stringify({ with: ["theme", "comment", "image"] }),
+      body: JSON.stringify({
+        with: ["appuser", "theme", "comment", "image", { tag: "article_tag" }],
+      }),
     })
       .then((resp) => {
         return resp.json();
@@ -24,16 +26,24 @@ const ArticleDetailScreen = () => {
 
   return (
     <>
-      <h1>Détail de l'article : {article?.account?.pseudo}</h1>
+      <h1>Détail de l'article : {article?.title}</h1>
+      <b>Publié par : </b> {article?.appUser?.pseudo}
+      <br />
       <b>Date de Publication : </b> {article?.created_at}
       <br />
       <b>Thème : </b> {article?.theme?.title}
       <br />
+      <div>
+        Mots-clés :
+        {article?.tags_list.map((tag) => {
+          return <span className="badge bg-secondary ms-2">{tag.title}</span>;
+        })}
+      </div>
       <b>Contenu : </b> {article?.content}
       <br />
       {article &&
         Object.values(article.images_list).map((img) => {
-          return <img key={img.Id_image}src={img.src} alt={img.alt} />;
+          return <img key={img.Id_image} src={img.src} alt={img.alt} />;
         })}
       <br />
       <h3>Commentaires</h3>
