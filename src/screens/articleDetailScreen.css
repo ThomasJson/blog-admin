@@ -1,0 +1,20 @@
+.article-infos {
+    display: flex;
+    flex-direction: row;
+}
+.infos {
+    margin-right: 24px;
+}
+.article {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+
+}
+.article-content {
+    width: 50%;
+    font-size: 1.3em;
+}
+.img-spacing {
+    margin-right: 28px;
+}
