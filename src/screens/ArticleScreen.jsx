@@ -37,47 +37,41 @@ const ArticleScreen = () => {
       <div className="articles-container">
         {articles.map((article) => {
           return (
-            <>
-              <div>
-                <div
-                  key={article.Id_article}
-                  className="card card-margin"
-                  style={{ width: "18rem" }}
-                >
-                  {article &&
-                    Object.values(article.images_list).map((img) => {
-                      return (
-                        <img
-                          key={img.Id_image}
-                          src={img.src}
-                          alt={img.alt}
-                          style={{ width: "100%", height: "200px" }}
-                          className="card-img-top"
-                        />
-                      );
-                    })}
+            <div
+              key={article.Id_article}
+              className="card card-margin"
+              style={{ width: "18rem" }}
+            >
+              {article &&
+                Object.values(article.images_list).map((img) => {
+                  return (
+                    <img
+                      key={img.Id_image}
+                      src={img.src}
+                      alt={img.alt}
+                      style={{ width: "100%", height: "200px" }}
+                      className="card-img-top"
+                    />
+                  );
+                })}
 
-                  <div className="card-body">
-                    <h5 className="card-title">{article.title}</h5>
-                    <p className="card-text">
-                      Publié le : {article.created_at}
-                    </p>
-                    <p className="card-text">
-                      Auteur : {article?.appUser?.pseudo}
-                    </p>
-                    <p className="card-text">Thème : {article?.theme?.title}</p>
-                    <div
-                      onClick={() => {
-                        navigate(`/article/${article.Id_article}`);
-                      }}
-                      class="btn btn-primary"
-                    >
-                      Lire l'article
-                    </div>
-                  </div>
+              <div className="card-body">
+                <h5 className="card-title">{article.title}</h5>
+                <p className="card-text">
+                  Publié le : {new Date(article.created_at).toLocaleDateString()}
+                </p>
+                <p className="card-text">Auteur : {article?.appUser?.pseudo}</p>
+                <p className="card-text">Thème : {article?.theme?.title}</p>
+                <div
+                  onClick={() => {
+                    navigate(`/article/${article.Id_article}`);
+                  }}
+                  className="btn btn-primary"
+                >
+                  Lire l'article
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>
