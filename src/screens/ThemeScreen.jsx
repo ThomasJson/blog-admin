@@ -1,9 +1,9 @@
+import "./themeScreen.scss";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ThemeScreen = () => {
-    
   const [themes, setThemes] = useState([]);
 
   const navigate = useNavigate();
@@ -33,18 +33,21 @@ const ThemeScreen = () => {
       <h1>Liste des Thèmes</h1>
       {/* nous utilisons map sur le state tags afin de créer les lignes 
       dans le tbody du tableau */}
-      <table>
-        <tbody>
-          {themes.map((theme) => {
-            return (
-              <tr key={theme.Id_theme} onClick={()=>{navigate(`/theme/${theme.Id_theme}`);}}>
-                <td>{theme.title}</td>
-                <td></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="themes-container">
+        {themes.map((theme) => {
+          return (
+            <button
+              key={theme.Id_theme}
+              onClick={() => {
+                navigate(`/theme/${theme.Id_theme}`);
+              }}
+              className="style-4"
+            >
+              {theme.title}
+            </button>
+          );
+        })}
+      </div>
     </>
   );
 };

@@ -1,3 +1,4 @@
+import './themeDetailScreen.scss';
 import React from "react";
 import { useParams } from "react-router-dom";
 // Récupérer l’id de la route
@@ -20,20 +21,26 @@ const ThemeDetailScreen = () => {
 
   return (
     <>
-      <h1>Thème : {theme?.title}</h1> 
-      <img src={theme?.img_src} alt="Pic" style={{width: '600px'}} />
-      <h2>Liste des articles :</h2>
+      <h1>{theme?.title}</h1>
+      <img src={theme?.img_src} alt="Pic" style={{ width: "600px" }} />
+      <h2 className='mt-5'>Articles :</h2>
+      <div className="themed-articles-container">
+        {theme?.articles_list.map((article) => {
+          return (
+            <div className="themed-articles" key={article.Id_article}>
+              <p>
+                <b className="me-2">{article.title}</b>
+              </p>
 
-      {theme?.articles_list.map((article) => {
-        return (
-          <div key={article.Id_article}>
-            <b className="me-2">{article.title}</b>
-            publié le {new Date(article.created_at).toLocaleDateString()}
-            <span className="ms-2">par {article?.appUser?.pseudo}</span>
-          </div>
-        );
-      })}
-      <br />
+              <p>
+                publié le {new Date(article.created_at).toLocaleDateString()}
+              </p>
+
+              <p>par {article?.appUser?.pseudo}</p>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

@@ -30,7 +30,7 @@ const TagScreen = () => {
 
   return (
     <>
-      <h1>Liste des mots-clés</h1>
+      <h1>Tags List</h1>
       {/* nous utilisons map sur le state tags afin de créer les lignes 
       dans le tbody du tableau */}
       <div className="tags-container">

@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 const ArticleDetailScreen = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
-  console.log("article:", article);
 
   useEffect(() => {
     fetch("http://blog-api.loc/article/" + id, {
@@ -33,7 +32,7 @@ const ArticleDetailScreen = () => {
           <b>Publié par</b> : {article?.appUser?.pseudo}
         </p>
         <p className="infos">
-          <b>Date de Publication</b> : {article?.created_at}
+          <b>Date de Publication</b> : {new Date(article?.created_at).toLocaleDateString()}
         </p>
         <p className="infos">
           <b>Thème</b> : {article?.theme?.title}
@@ -42,7 +41,7 @@ const ArticleDetailScreen = () => {
       <div>
         Tags :
         {article?.tags_list.map((tag) => {
-          return <span className="badge bg-secondary ms-2">{tag.title}</span>;
+          return <span key={Object.values(tag?.Id_tag)} className="badge bg-secondary ms-2">{tag.title}</span>;
         })}
       </div>
 

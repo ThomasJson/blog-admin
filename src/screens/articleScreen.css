@@ -1,4 +1,5 @@
 .articles-container {
+    margin-top: 50px;
     display: flex !important;
     flex-direction: row;
     flex-wrap: wrap;
@@ -7,4 +8,8 @@
 .card-margin {
     margin-right: 20px;
     margin-bottom: 20px;
+}
+
+p.card-text {
+    margin: 0px 0px 9px 0px !important;
 }
