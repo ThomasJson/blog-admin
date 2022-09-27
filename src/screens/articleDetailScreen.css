@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: row;
     margin-top: 30px;
-
 }
 .article-content {
     width: 50%;
@@ -17,4 +16,13 @@
 }
 .img-spacing {
     margin-right: 28px;
+}
+.commentaires {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #F5F5F5;
+}
+.comment-infos {
+    display: flex;
+    flex-direction: row;
 }

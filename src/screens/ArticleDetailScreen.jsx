@@ -63,15 +63,14 @@ const ArticleDetailScreen = () => {
       </div>
       <br />
 
-      <h3>Commentaires</h3>
       {article &&
         Object.values(article?.comments_list).map((comment) => {
           return (
-            <div key={comment.Id_comment}>
-              <span>{comment.title}</span>
-              <br />
-              <span>publié le {comment.created_at}</span>
-              <br />
+            <div className="commentaires" key={comment.Id_comment}>
+              <div className="comment-infos">
+                <div className="infos"><b>{comment?.Id_appUser}</b></div>
+                <div className="infos">publié le {comment.created_at}</div>
+              </div>
               <span>{comment.content}</span>
             </div>
           );
