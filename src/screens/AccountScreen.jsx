@@ -1,3 +1,4 @@
+import './accountScreen.scss';
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,30 +36,26 @@ const AccountScreen = () => {
       <h1>Liste des Comptes</h1>
       {/* nous utilisons map sur le state tags afin de créer les lignes 
       dans le tbody du tableau */}
-      <table>
-        <tbody>
-          {appUsers.map((user) => {
-            return (
-              <tr
-                key={user.Id_appUser}
-                onClick={() => {
-                  navigate(`/account/${user.Id_appUser}`);
-                }}
-              >
-                <td>{user.pseudo}</td>
-                <td>
-                  <b>email : </b> {user?.account?.login}
-                  <br />
-                </td>
-                <td>
-                  <b>role : </b> {user?.role?.title}<br/>
-                  <br />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className='accounts-container'>
+        {appUsers.map((user) => {
+          return (
+            <div
+              key={user.Id_appUser}
+              onClick={() => {
+                navigate(`/account/${user.Id_appUser}`);
+              }}
+              className="infos-container"
+            >
+              <p className='infos'>
+                <b>Pseudo : </b> {user?.account?.login}
+              </p>
+              <p className='infos'>
+                <b>role : </b> {user?.role?.title}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

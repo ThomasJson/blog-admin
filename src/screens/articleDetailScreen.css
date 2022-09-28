@@ -3,7 +3,7 @@
     flex-direction: row;
 }
 .infos {
-    margin-right: 24px;
+    margin-right: 24px !important;
 }
 .article {
     display: flex;

@@ -38,10 +38,10 @@ const ArticleDetailScreen = () => {
           <b>Thème</b> : {article?.theme?.title}
         </p>
       </div>
-      <div>
+      <div className="mt-3">
         Tags :
         {article?.tags_list.map((tag) => {
-          return <span key={Object.values(tag?.Id_tag)} className="badge bg-secondary ms-2">{tag.title}</span>;
+          return <span key={Object.values(tag?.Id_tag)} className="badge bg-primary ms-2">{tag.title}</span>;
         })}
       </div>
 
@@ -67,8 +67,8 @@ const ArticleDetailScreen = () => {
           return (
             <div className="commentaires" key={comment.Id_comment}>
               <div className="comment-infos">
-                <div className="infos"><b>{comment?.Id_appUser}</b></div>
-                <div className="infos">publié le {comment.created_at}</div>
+                <div className="infos"><b>{comment?.title}</b></div>
+                <div className="infos">publié le : {new Date(article?.created_at).toLocaleDateString()}</div>
               </div>
               <span>{comment.content}</span>
             </div>

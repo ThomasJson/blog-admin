@@ -28,8 +28,8 @@ const ThemeDetailScreen = () => {
         {theme?.articles_list.map((article) => {
           return (
             <div className="themed-articles" key={article.Id_article}>
-              <p>
-                <b className="me-2">{article.title}</b>
+              <p className='mb-2'>
+                <b className="me-2 ">{article.title}</b>
               </p>
 
               <p>
