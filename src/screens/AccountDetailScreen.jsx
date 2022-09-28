@@ -1,3 +1,4 @@
+import './accountDetailScreen.scss';
 import React from "react";
 import { useParams } from "react-router-dom";
 // Récupérer l’id de la route
@@ -20,14 +21,14 @@ const AccountDetailScreen = () => {
 
   return (
     <>
-      <h1>Détail de l'utilisateur : {account?.pseudo}</h1>
-      <b>email : </b> {account?.account?.login}
-      <br />
-      <b>role : </b> {account?.role?.title}
-      <br />
+      <h1>{account?.pseudo}</h1>
+      <div className="account-infos">
+      <p className='infos'><b>Pseudo : </b> {account?.account?.login}</p>
+      <p className='infos'><b>role : </b> {account?.role?.title}</p>
+      </div>
       {account?.Id_role === "1" && (
         <>
-          <h3>Articles rédigés</h3>
+          <h3 className='mt-2'>Posts</h3>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -50,7 +51,7 @@ const AccountDetailScreen = () => {
       )}
       {account?.Id_role === "2" && (
         <>
-          <h3>Articles rédigés</h3>
+          <h3 className='mt-2'>Posts</h3>
           <table className="table table-striped">
             <thead>
               <tr>
