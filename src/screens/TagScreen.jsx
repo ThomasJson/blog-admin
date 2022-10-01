@@ -48,6 +48,53 @@ const TagScreen = () => {
           );
         })}
       </div>
+
+      <button
+        className="btn-new-tag mt-5 bg-success"
+        onClick={() => {
+          document.querySelector(".table").classList.add("show");
+          document.querySelector(".inputText").focus();
+        }}
+      >
+        Add New Tag
+      </button>
+
+      <table className="table hidden">
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody className="tBody">
+          <tr>
+            <td>
+              <input type="text" focus="focus" className="inputText" />
+            </td>
+            <td className="d-flex">
+              <form method="" action="">
+                <input type="hidden" name="" value="" />
+                <button
+                  className="disable-btn btn btn-success me-1"
+                  name="validate"
+                >
+                  V
+                </button>
+                <button
+                  onClick={(e) => {
+                    // e.preventDefault();
+                    document.querySelector(".table").classList.add("hidden");
+                  }}
+                  className="disable-btn btn btn-danger"
+                  name="delete"
+                >
+                  X
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };
